@@ -126,4 +126,14 @@ class GroundController extends Controller
 
         return response()->json(['success' => 'Ground delete successfully']);
     }
+
+    function availability(Request $request) {
+
+        $games = Ground::where('location_id', $request->location)->where('game_type_id', $request->game_type)
+        ->where('level', $request->level)
+        ->where('surrounding',$request->surroundings)->get();
+
+        return response()->json(['success' => $games]);
+    }
+
 }
