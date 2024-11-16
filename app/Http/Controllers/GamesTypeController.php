@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class GamesTypeController extends Controller
 {
+
+    function get() {
+        return response()->json(['success' => GameType::all()]);
+    }
     function create(Request $request) {
 
         $user = new GameType();

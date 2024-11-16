@@ -36,4 +36,30 @@ class UserController extends Controller
 
         return response()->json(User::where('email', $request->email)->where('user_type',$request->user_type)->first());
     }
+
+    function get() {
+
+        return response()->json(['success' => User::where('user_type', '!=', 'super_admin')->get()]);
+    }
+
+    function update(Request $request) {
+
+        $user = User::find($request->id);
+
+        if($request->name){
+            $user->name = $request->name;
+        }
+
+        if($request->phone_number){
+            $user->phone_number = $request->phone_number;
+        }
+
+        if($request->address){
+            $user->address = $request->address;
+        }
+
+        $user->save();
+
+        return response()->json(['success' => 'User update successfully']);
+    }
 }

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 class LocationController extends Controller
 {
 
+    function get() {
+        return response()->json(['success' => Location::all()]);
+    }
+
     function create(Request $request) {
 
         $user = new Location();
