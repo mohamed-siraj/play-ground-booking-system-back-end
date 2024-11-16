@@ -9,9 +9,11 @@ class GroundController extends Controller
 {
 
     function get() {
-
         return response()->json(['success' => Ground::all()]);
+    }
 
+    function show(Request $request) {
+        return response()->json(['success' => Ground::find($request->id)]);
     }
 
     function create(Request $request) {

@@ -46,6 +46,7 @@ Route::delete('games-type', [GamesTypeController::class, 'delete']);
  * grounds
  */
 Route::get('grounds', [GroundController::class, 'get']);
+Route::get('grounds/{id}', [GroundController::class, 'show']);
 Route::post('grounds', [GroundController::class, 'create']);
 Route::post('ground-update', [GroundController::class, 'update']);
 Route::delete('grounds', [GroundController::class, 'delete']);
