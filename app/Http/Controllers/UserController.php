@@ -37,9 +37,9 @@ class UserController extends Controller
         return response()->json(User::where('email', $request->email)->where('user_type',$request->user_type)->first());
     }
 
-    function get() {
-
-        return response()->json(['success' => User::where('user_type', '!=', 'super_admin')->get()]);
+    function get(Request $request) {
+        return response()->json(['success' => User::where('user_type', '!=', 'super_admin')
+        ->where('user_type', 'LIKE', '%' . $request->query('user_type') . '%')->get()]);
     }
 
     function update(Request $request) {

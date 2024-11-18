@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
-
+use Throwable;
 class LocationController extends Controller
 {
 
     function get() {
         return response()->json(['success' => Location::all()]);
     }
+
+    function show(Request $request) {
+        return response()->json(['success' => Location::find($request->id)]);
+    }
+
 
     function create(Request $request) {
 
@@ -32,9 +37,14 @@ class LocationController extends Controller
 
     function delete(Request $request) {
 
-        Location::where('id', $request->id)->delete();
+        try {
+            Location::where('id', $request->id)->delete();
 
-        return response()->json(['success' => 'Location delete successfully']);
+            return response()->json(['success' => 'Location delete successfully']);
+        } catch (Throwable $e) {
+            return response()->json(['error' => $e->getMessage()])->setStatusCode(500);
+        }
+
     }
 
 }

@@ -30,17 +30,19 @@ Route::patch('users', [UserController::class, 'update']);
  */
 Route::get('locations', [LocationController::class, 'get']);
 Route::post('locations', [LocationController::class, 'create']);
+Route::get('locations/{id}', [LocationController::class, 'show']);
 Route::patch('locations', [LocationController::class, 'update']);
-Route::delete('locations', [LocationController::class, 'delete']);
+Route::delete('locations/{id}', [LocationController::class, 'delete']);
 
 
 /**
  * game type
  */
 Route::get('games-type', [GamesTypeController::class, 'get']);
+Route::get('games-type/{id}', [GamesTypeController::class, 'show']);
 Route::post('games-type', [GamesTypeController::class, 'create']);
 Route::patch('games-type', [GamesTypeController::class, 'update']);
-Route::delete('games-type', [GamesTypeController::class, 'delete']);
+Route::delete('games-type/{id}', [GamesTypeController::class, 'delete']);
 
 /**
  * grounds
