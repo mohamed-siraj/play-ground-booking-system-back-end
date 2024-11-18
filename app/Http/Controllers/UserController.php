@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-
+use Throwable;
 class UserController extends Controller
 {
     function register(Request $request) {
@@ -42,12 +41,20 @@ class UserController extends Controller
         ->where('user_type', 'LIKE', '%' . $request->query('user_type') . '%')->get()]);
     }
 
+    function show(Request $request) {
+        return response()->json(['success' => User::find($request->id)]);
+    }
+
     function update(Request $request) {
 
         $user = User::find($request->id);
 
         if($request->name){
             $user->name = $request->name;
+        }
+
+        if($request->user_type){
+            $user->user_type = $request->user_type;
         }
 
         if($request->phone_number){
@@ -61,5 +68,17 @@ class UserController extends Controller
         $user->save();
 
         return response()->json(['success' => 'User update successfully']);
+    }
+
+    function delete(Request $request) {
+
+        try {
+            User::where('id', $request->id)->delete();
+
+            return response()->json(['success' => 'Location delete successfully']);
+        } catch (Throwable $e) {
+            return response()->json(['error' => $e->getMessage()])->setStatusCode(500);
+        }
+
     }
 }

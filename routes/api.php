@@ -23,7 +23,9 @@ Route::post('login', [UserController::class, 'login']);
  * users
  */
 Route::get('users', [UserController::class, 'get']);
+Route::get('users/{id}', [UserController::class, 'show']);
 Route::patch('users', [UserController::class, 'update']);
+Route::delete('users/{id}', [UserController::class, 'delete']);
 
 /**
  * Location
