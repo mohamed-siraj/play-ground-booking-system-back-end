@@ -3,6 +3,7 @@
 use App\Http\Controllers\GamesTypeController;
 use App\Http\Controllers\GroundController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -53,7 +54,14 @@ Route::get('grounds', [GroundController::class, 'get']);
 Route::get('grounds/{id}', [GroundController::class, 'show']);
 Route::post('grounds', [GroundController::class, 'create']);
 Route::post('ground-update', [GroundController::class, 'update']);
-Route::delete('grounds', [GroundController::class, 'delete']);
+Route::delete('grounds/{id}', [GroundController::class, 'delete']);
+
+/**
+ * messages
+ */
+Route::get('message', [MessageController::class, 'get']);
+Route::get('message/{id}', [MessageController::class, 'show']);
+Route::post('message', [MessageController::class, 'create']);
 
 /**
  * availability
