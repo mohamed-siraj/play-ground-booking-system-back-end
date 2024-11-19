@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\GamesTypeController;
 use App\Http\Controllers\GroundController;
 use App\Http\Controllers\LocationController;
@@ -62,6 +63,13 @@ Route::delete('grounds/{id}', [GroundController::class, 'delete']);
 Route::get('message', [MessageController::class, 'get']);
 Route::get('message/{id}', [MessageController::class, 'show']);
 Route::post('message', [MessageController::class, 'create']);
+
+/**
+ * booking
+ */
+Route::get('booking', [BookingController::class, 'get']);
+Route::get('booking/{id}', [BookingController::class, 'show']);
+Route::post('booking', [BookingController::class, 'create']);
 
 /**
  * availability
