@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\GameType;
 use Illuminate\Http\Request;
-
+use Throwable;
 class GamesTypeController extends Controller
 {
 
     function get() {
         return response()->json(['success' => GameType::all()]);
+    }
+
+    function show(Request $request) {
+        return response()->json(['success' => GameType::find($request->id)]);
     }
 
     function create(Request $request) {
@@ -32,8 +36,14 @@ class GamesTypeController extends Controller
 
     function delete(Request $request) {
 
-        GameType::where('id', $request->id)->delete();
+        try {
+            GameType::where('id', $request->id)->delete();
 
-        return response()->json(['success' => 'GameType delete successfully']);
+            return response()->json(['success' => 'GameType delete successfully']);
+        } catch (Throwable $e) {
+            return response()->json(['error' => $e->getMessage()])->setStatusCode(500);
+        }
+
+
     }
 }

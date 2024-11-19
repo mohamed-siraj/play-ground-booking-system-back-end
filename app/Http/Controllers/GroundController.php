@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class GroundController extends Controller
 {
 
-    function get() {
-        return response()->json(['success' => Ground::all()]);
+    function get(Request $request) {
+        return response()->json(['success' => Ground::where('ground_admin_id', 'LIKE','%' . $request->query('user_id') . '%')->get()]);
     }
 
     function show(Request $request) {
@@ -129,9 +129,10 @@ class GroundController extends Controller
 
     function availability(Request $request) {
 
-        $games = Ground::where('location_id', $request->location)->where('game_type_id', $request->game_type)
-        ->where('level', $request->level)
-        ->where('surrounding',$request->surroundings)->get();
+
+        $games = Ground::where('location_id', '=',$request->location)->where('game_type_id', '=',$request->game_type)
+        ->where('level', '=',$request->level)
+        ->where('surrounding','=',$request->surrounding)->get();
 
         return response()->json(['success' => $games]);
     }
